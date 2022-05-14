@@ -7,7 +7,14 @@ const Welcome = () => {
       <article className='content'>
         <div className='gallery'>
           {galleryData.map(img => {
-            return <img className={img.className} src={img.src} alt={img.alt} />
+            return (
+              <img
+                key={img.alt}
+                className={img.className}
+                src={img.src}
+                alt={img.alt}
+              />
+            )
           })}
           {/* <img
             src='https://landonhotel.com/images/hotel/intro_room.jpg'
