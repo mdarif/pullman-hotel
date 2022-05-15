@@ -1,6 +1,14 @@
-# Build a Serverless React app using AWS Lambda, DynamoDB and an API Gateway
+# Build a Serverless React App using AWS Lambda, DynamoDB and an API Gateway
 ![API Gateway, Lambda and DynamoDB](https://miro.medium.com/max/1272/1*MFvtJPjmug6qbWa92mp5UA.png)
 
+
+## Stacks Used
+- [AWS Lambda](https://aws.amazon.com/lambda/)
+- [Amazon DynamoDB](https://aws.amazon.com/dynamodb/)
+- [Amazon API Gateway](https://aws.amazon.com/apigateway/)
+- [AWS Amplify](https://aws.amazon.com/amplify/)
+- [ReactJS](https://reactjs.org/)
+- [AWS SDK](https://github.com/aws/aws-sdk-js)
 
 ## What’s AWS Amplify?
 
