@@ -1,7 +1,24 @@
-import React from 'react'
-import galleryData from './data/gallery_images.json'
+import { useState, useEffect } from 'react'
+// import galleryData from './data/gallery_images.json'
 
 const Welcome = () => {
+  const [galleryData, setGalleryData] = useState([])
+
+  const loadGalleryData = async () => {
+    const response = await fetch(
+      'https://co4e5yjmr3.execute-api.us-east-1.amazonaws.com/Production/gallery_images'
+    )
+    const json = await response.json()
+
+    // Assign the data to the state variable
+    setGalleryData(json)
+  }
+
+  useEffect(() => {
+    // Load the gallery data from the AWS API Gateway
+    loadGalleryData()
+  }, [])
+
   return (
     <div className='scene' id='welcome'>
       <article className='content'>
@@ -9,34 +26,13 @@ const Welcome = () => {
           {galleryData.map(img => {
             return (
               <img
-                key={img.alt}
+                key={img.src}
                 className={img.className}
                 src={img.src}
                 alt={img.alt}
               />
             )
           })}
-          {/* <img
-            src='https://landonhotel.com/images/hotel/intro_room.jpg'
-            alt='Intro Gallery Room Sample'
-          />
-          <img
-            src='https://landonhotel.com/images/hotel/intro_pool.jpg'
-            alt='Intro Gallery Pool Sample'
-          />
-          <img
-            src='https://landonhotel.com/images/hotel/intro_dining.jpg'
-            alt='Intro Gallery Dining Sample'
-          />
-          <img
-            src='https://landonhotel.com/images/hotel/intro_attractions.jpg'
-            alt='Intro Gallery Attractions Sample'
-          />
-          <img
-            className='hidesm'
-            src='https://landonhotel.com/images/hotel/intro_wedding.jpg'
-            alt='Intro Wedding Sample'
-          /> */}
         </div>
         <h1>Welcome to the Pullman&nbsp;Hotel</h1>
         <p>
@@ -46,10 +42,7 @@ const Welcome = () => {
           is a great place for travelers and locals to engage over drinks, food,
           and good&nbsp;conversation. &nbsp;To learn more about the Landon Hotel
           in the West End, browse our website and{' '}
-          <a href='files/landon_information_sheet_London.pdf'>
-            download our handy information sheet
-          </a>
-          .
+          <a href='#'>download our handy information sheet</a>.
         </p>
       </article>
     </div>

@@ -1,8 +1,37 @@
-import React from 'react'
-import accessibilityData from './data/accessibility.json'
-import servicesData from './data/services_amenities.json'
+import { useEffect, useState } from 'react'
+// import accessibilityData from './data/accessibility.json'
+// import servicesData from './data/services_amenities.json'
 
 const HotelInfo = () => {
+  const [servicesData, setServicesData] = useState([])
+  const [accessibilityData, setAccessibilityData] = useState([])
+
+  const loadAccessibilityData = async () => {
+    const response = await fetch(
+      'https://co4e5yjmr3.execute-api.us-east-1.amazonaws.com/Production/accessibilities'
+    )
+    const json = await response.json()
+
+    setAccessibilityData(json)
+  }
+
+  const loadServicesData = async () => {
+    const response = await fetch(
+      'https://co4e5yjmr3.execute-api.us-east-1.amazonaws.com/Production/services'
+    )
+    const json = await response.json()
+
+    setServicesData(json)
+  }
+
+  useEffect(() => {
+    // Load the Accessibilities data from the AWS API Gateway
+    loadAccessibilityData()
+
+    // Load the Services data from the AWS API Gateway
+    loadServicesData()
+  }, [])
+
   return (
     <div className='scene' id='hotelinfo'>
       <article className='heading'>
@@ -45,9 +74,10 @@ const HotelInfo = () => {
             your stay comfortable, and your experience one-of-a-kind.
           </p>
           <ul>
-            {servicesData.map(service => (
-              <li key={service.name}>{service.name}</li>
-            ))}
+            {servicesData &&
+              servicesData.map(service => (
+                <li key={service.name}>{service.name}</li>
+              ))}
           </ul>
         </section>
         <section className='checklist' id='accessibility'>
